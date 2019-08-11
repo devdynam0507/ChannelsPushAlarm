@@ -1,0 +1,56 @@
+{% extends "./signup.html" %}
+
+{% block title %}로그인{% endblock %}
+
+{% block mycss %}
+<style>
+    #login-box {
+        position: relative;
+        margin: 5% auto;
+        width: 600px;
+        height: 300px;
+        background: #FFF;
+        border-radius: 2px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <script type="text/javascript">
+          alert('잘못된 접근입니다. \n로그인을 위해서는 로그아웃이 필요합니다.')
+          window.location.href = '/';
+        </script>
+    {% else %}
+    <div id="login-box">
+        <div class="left">
+            <span style="margin-bottom: 10px;">
+                <a href="{% url 'index' %}"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a>
+                <h1> Sign in</h1>
+            </span>
+            <hr>
+
+            <form method="post" action="">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input type="submit" name="signup_submit" value="Sign in" />
+            </form>
+
+            {% if error != None %}
+            <div class="alert alert-danger" role="alert" style="margin-top: 10px; padding: 5px">
+                  <p class="mb-0">{{ error }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="right">
+            <span class="loginwith">Sign in with<br />social network</span>
+
+            <button class="social-signin facebook">Log in with facebook</button>
+            <!-- Adding kakao -->
+        </div>
+        <div class="or">OR</div>
+    </div>
+    {% endif %}
+{% endblock %}

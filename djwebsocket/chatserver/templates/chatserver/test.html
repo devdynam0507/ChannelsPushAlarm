@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Django Demo - WebSocket!</title>
-</head>
+{% extends "chatserver/index.html" %}
 {% block content %}
 <body>
+    <h1> Test </h1>
     <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
 </body>
 {% endblock %}
-<script>
+    <script>
     var chatSocket = new WebSocket('ws://' + window.location.host);
 
     chatSocket.onmessage = function(e) {
@@ -40,5 +36,3 @@
         messageInputDom.value = '';
     };
 </script>
-
-</html>
